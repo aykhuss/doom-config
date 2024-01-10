@@ -4,6 +4,7 @@ if ! command -v emacs &> /dev/null; then
     exit 1
 else
     #> should check version?
+    :
 fi
 
 if [[ -d "$HOME/.emacs.d" ]]; then

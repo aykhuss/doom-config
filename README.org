@@ -32,6 +32,7 @@ if ! command -v emacs &> /dev/null; then
     exit 1
 else
     #> should check version?
+    :
 fi
 #+end_src
 
