@@ -5,21 +5,38 @@
 
 [[https://github.com/doomemacs/doomemacs][Doom Emacs]] is a great configuration framework I ended up settling on after writing emacs configs myself and trying out other frameworks like Spacemacs and co.
 
-# should do tangle to generate install files etc.
+To re-generate all configuration and installation files, run the ~org-tangle~ command:
+#+begin_src elisp :results silent
+(org-babel-tangle)
+#+end_src
 
-Let's start by installing Doom:
+* Installation
 
-#+begin_src shell
+Let's tangle an ~install.sh~ script to get everything set up for us.
+#+begin_src shell :noweb yes :tangle install.sh :shebang "#!/usr/bin/env bash"
 
-#> do we have emacs on this system?
+<<check_emacs>>
+
+<<backup_emacs>>
+
+<<install_doom>>
+
+<<config_doom>>
+
+#+end_src
+
+** Check for emacs
+#+begin_src shell :noweb-ref check_emacs
 if ! command -v emacs &> /dev/null; then
     echo "could not find an installation of emacs!"
     exit 1
 else
     #> should check version?
 fi
+#+end_src
 
-#> backup existing configuration if not doom
+** Backup any existing emacs configuration
+#+begin_src shell :noweb-ref backup_emacs
 if [[ -d "$HOME/.emacs.d" ]]; then
     if ! [[ -f $HOME/.emacs.d/bin/doom ]]; then
         #> not a doom installation => backup
@@ -27,8 +44,10 @@ if [[ -d "$HOME/.emacs.d" ]]; then
         mv $HOME/.emacs.d $HOME/.emacs.d.bak
     fi
 fi
+#+end_src
 
-#> install doom emacs if not installed yet
+** Install Doom emacs
+#+begin_src shell :noweb-ref install_doom
 if ! [[ -f "$HOME/.emacs.d/bin/doom" ]]; then
     git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
     ~/.emacs.d/bin/doom install
@@ -38,8 +57,10 @@ if ! [[ -f "$HOME/.emacs.d/bin/doom" ]]; then
         echo "no $HOME/bin folder: did not create a symbolic link to 'doom'"
     fi
 fi
+#+end_src
 
-#> proceed with doom config setup
+** Set up doom configuration
+#+begin_src shell :noweb-ref config_doom
 if [[ -d "$HOME/.doom.d" ]]; then
     echo "found existing doom confiuration at '$HOME/.doom.d'"
     read -r -p "backup & proceed? [y/N] " response
@@ -54,11 +75,31 @@ if [[ -d "$HOME/.doom.d" ]]; then
     esac
 fi
 
-#> create symlinks to the config files here
 mkdir $HOME/.doom.d
 for cfg in config.el custom.el init.el packages.el; do
     ln -s ${cfg} $HOME/.doom.d/${cfg}
 done
-
 #+end_src
 
+* Configuration
+There is also a literate configuration option within doom emacs, which could be worth exploring in the future.
+** init
+:PROPERTIES:
+:header-args: :tangle test_init.el
+:END:
+every source block here should be exported to the a ~test_init.el~ file.
+Untimately will want to move to tangle all config files from this one.
+#+begin_src elisp
+(setq user-full-name "Alexander Huss"
+      user-mail-address "alexander.huss@cern.ch")
+#+end_src
+
+#+begin_src elisp
+;; defaults proposed in the manual [https://orgmode.org/manual/Activation.html]
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+#+end_src
+
+
+** packages
