@@ -41,5 +41,5 @@ fi
 
 mkdir $HOME/.doom.d
 for cfg in config.el custom.el init.el packages.el; do
-    ln -s ${cfg} $HOME/.doom.d/${cfg}
+    cp ${cfg} $HOME/.doom.d/${cfg}
 done
