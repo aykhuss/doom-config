@@ -53,7 +53,7 @@ if ! [[ -f "$HOME/.emacs.d/bin/doom" ]]; then
     git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
     ~/.emacs.d/bin/doom install
     if [[ -d "$HOME/bin" ]]; then
-        ln -s $HOME/.emacs.d/bin/doom doom
+        ln -s $HOME/.emacs.d/bin/doom $HOME/bin/doom
     else
         echo "no $HOME/bin folder: did not create a symbolic link to 'doom'"
     fi
