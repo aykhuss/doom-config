@@ -1,0 +1,64 @@
+#+TITLE: My Doom Emacs Configuration
+#+AUTHOR: Alexander Huss
+
+# should make this a literate configuration at some point
+
+[[https://github.com/doomemacs/doomemacs][Doom Emacs]] is a great configuration framework I ended up settling on after writing emacs configs myself and trying out other frameworks like Spacemacs and co.
+
+# should do tangle to generate install files etc.
+
+Let's start by installing Doom:
+
+#+begin_src shell
+
+#> do we have emacs on this system?
+if ! command -v emacs &> /dev/null; then
+    echo "could not find an installation of emacs!"
+    exit 1
+else
+    #> should check version?
+fi
+
+#> backup existing configuration if not doom
+if [[ -d "$HOME/.emacs.d" ]]; then
+    if ! [[ -f $HOME/.emacs.d/bin/doom ]]; then
+        #> not a doom installation => backup
+        echo "backing up ~/.emacs.d to ~/.emacs.d.bak ..."
+        mv $HOME/.emacs.d $HOME/.emacs.d.bak
+    fi
+fi
+
+#> install doom emacs if not installed yet
+if ! [[ -f "$HOME/.emacs.d/bin/doom" ]]; then
+    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+    ~/.emacs.d/bin/doom install
+    if [[ -d "$HOME/bin" ]]; then
+        ln -s $HOME/.emacs.d/bin/doom doom
+    else
+        echo "no $HOME/bin folder: did not create a symbolic link to 'doom'"
+    fi
+fi
+
+#> proceed with doom config setup
+if [[ -d "$HOME/.doom.d" ]]; then
+    echo "found existing doom confiuration at '$HOME/.doom.d'"
+    read -r -p "backup & proceed? [y/N] " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            mv $HOME/.doom.d $HOME/.doom.d.bak
+            # rm -rf $HOME/.doom.d
+            ;;
+        ,*)
+            exit 0
+            ;;
+    esac
+fi
+
+#> create symlinks to the config files here
+mkdir $HOME/.doom.d
+for cfg in config.el custom.el init.el packages.el; do
+    ln -s ${cfg} $HOME/.doom.d/${cfg}
+done
+
+#+end_src
+
