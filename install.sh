@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# [[file:README.org::*Installation][Installation:1]]
+# [[file:README.org::*Installation][]]
 if ! command -v emacs &> /dev/null; then
     echo "could not find an installation of emacs!"
     exit 1
@@ -6,7 +8,9 @@ else
     #> should check version?
     :
 fi
+# ends here
 
+# [[file:README.org::*Installation][]]
 if [[ -d "$HOME/.emacs.d" ]]; then
     if ! [[ -f $HOME/.emacs.d/bin/doom ]]; then
         #> not a doom installation => backup
@@ -14,7 +18,9 @@ if [[ -d "$HOME/.emacs.d" ]]; then
         mv $HOME/.emacs.d $HOME/.emacs.d.bak
     fi
 fi
+# ends here
 
+# [[file:README.org::*Installation][]]
 if ! [[ -f "$HOME/.emacs.d/bin/doom" ]]; then
     git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
     ~/.emacs.d/bin/doom install
@@ -24,7 +30,9 @@ if ! [[ -f "$HOME/.emacs.d/bin/doom" ]]; then
         echo "no $HOME/bin folder: did not create a symbolic link to 'doom'"
     fi
 fi
+# ends here
 
+# [[file:README.org::*Installation][]]
 if [[ -d "$HOME/.doom.d" ]]; then
     echo "found existing doom confiuration at '$HOME/.doom.d'"
     read -r -p "backup & proceed? [y/N] " response
@@ -43,3 +51,5 @@ mkdir $HOME/.doom.d
 for cfg in config.el custom.el init.el packages.el; do
     cp ${cfg} $HOME/.doom.d/${cfg}
 done
+# ends here
+# Installation:1 ends here

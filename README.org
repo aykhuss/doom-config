@@ -13,7 +13,7 @@ To re-generate all configuration and installation files, run the ~org-tangle~ co
 * Installation
 
 Let's tangle an ~install.sh~ script to get everything set up for us.
-#+begin_src shell :noweb yes :tangle install.sh :shebang "#!/usr/bin/env bash"
+#+begin_src shell :noweb yes :comments noweb :tangle install.sh :shebang "#!/usr/bin/env bash"
 
 <<check_emacs>>
 
@@ -86,7 +86,7 @@ done
 There is also a literate configuration option within doom emacs, which could be worth exploring in the future.
 ** init
 :PROPERTIES:
-:header-args: :tangle test_init.el
+:header-args: :comments both :tangle test_init.el
 :END:
 every source block here should be exported to the a ~test_init.el~ file.
 Untimately will want to move to tangle all config files from this one.
