@@ -15,6 +15,10 @@ To re-generate all configuration and installation files, run the ~org-tangle~ co
 Let's tangle an ~install.sh~ script to get everything set up for us.
 #+begin_src shell :noweb yes :comments noweb :tangle install.sh :shebang "#!/usr/bin/env bash"
 
+#> set up some directory variables
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+echo "installing doom configuration from ${SCRIPT_DIR} ..."
+
 <<check_emacs>>
 
 <<backup_emacs>>
@@ -78,7 +82,7 @@ fi
 
 mkdir $HOME/.doom.d
 for cfg in config.el custom.el init.el packages.el; do
-    cp ${cfg} $HOME/.doom.d/${cfg}
+    cp ${SCRIPT_DIR}/${cfg} $HOME/.doom.d/${cfg}
 done
 #+end_src
 

@@ -29,13 +29,29 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
+;; override fonts
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 14)
+      doom-variable-pitch-font (font-spec :family "ETBembo" :size 24))
+      ;;doom-variable-pitch-font (font-spec :family "Alegreya" :size 18))
+;;(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14 :height 1.0)
+;;      doom-variable-pitch-font (font-spec :family "ETBembo" :style "RomanOSF" :height 1.3))
+;;==
+;;(setq doom-font (font-spec :family "Fira Code" :style "Retina" :size 14 :height 1.0)
+;;      doom-variable-pitch-font (font-spec :family "ETBembo" :style "RomanOSF" :height 1.3)
+;;      doom-big-font (font-spec :family "Fira Code" :style "Retina" :size 24))
+
+;; mixed-pitch mode for org files (no clue how to get the variable-pitch-font to match size?!)
+;;(add-hook! 'org-mode-hook #'mixed-pitch-mode)
+;;(add-hook! 'org-mode-hook #'solaire-mode)
+;;(setq mixed-pitch-variable-pitch-cursor nil)
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-solarized-light)
 ;; using the `catppuccin-theme` package
 (setq doom-theme 'catppuccin)
-(setq catppuccin-flavor 'latte) ;; or 'latte, 'macchiato, or 'mocha
+(setq catppuccin-flavor 'mocha) ;; 'latte, 'frappe, 'macchiato, or 'mocha
 ;;(catppuccin-reload)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line

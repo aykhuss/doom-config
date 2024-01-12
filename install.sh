@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 # [[file:README.org::*Installation][Installation:1]]
+#> set up some directory variables
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+echo "installing doom configuration from ${SCRIPT_DIR} ..."
+
 # [[file:README.org::*Installation][]]
 if ! command -v emacs &> /dev/null; then
     echo "could not find an installation of emacs!"
@@ -49,7 +53,7 @@ fi
 
 mkdir $HOME/.doom.d
 for cfg in config.el custom.el init.el packages.el; do
-    cp ${cfg} $HOME/.doom.d/${cfg}
+    cp ${SCRIPT_DIR}/${cfg} $HOME/.doom.d/${cfg}
 done
 # ends here
 # Installation:1 ends here
