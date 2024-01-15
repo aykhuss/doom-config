@@ -214,3 +214,12 @@
 (when IS-MAC
   (add-hook 'org-mode-hook (lambda ()
     (define-key org-mode-map (kbd "C-c g") 'org-mac-link-get-link))))
+
+;; multiple cursors
+;;  > add cursor to each line
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;;  > cursors based on selection
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
