@@ -80,9 +80,10 @@
 ;; ways to link to mac applications
 (when IS-MAC  (package! org-mac-link))
 
-;;;;;;; mixed-pitch fonts
-;;;;;(package! mixed-pitch
-;;;;;  :hook (org-mode . mixed-pitch-mode)
-;;;;;  :config
-;;;;;  (setq mixed-pitch-set-heigth t)
-;;;;;  (set-face-attribute 'variable-pitch nil :height 1.3))
+;; mixed-pitch fonts
+;;(package! mixed-pitch
+;;  :hook (org-mode . mixed-pitch-mode)
+;;  :config
+;;  (setq mixed-pitch-set-heigth t)
+;;  (set-face-attribute 'variable-pitch nil :height 1.3))
+(package! mixed-pitch)

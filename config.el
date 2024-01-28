@@ -30,20 +30,17 @@
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
 ;; override fonts
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "ETBembo" :size 24))
-      ;;doom-variable-pitch-font (font-spec :family "Alegreya" :size 18))
-;;(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14 :height 1.0)
-;;      doom-variable-pitch-font (font-spec :family "ETBembo" :style "RomanOSF" :height 1.3))
-;;==
-;;(setq doom-font (font-spec :family "Fira Code" :style "Retina" :size 14 :height 1.0)
-;;      doom-variable-pitch-font (font-spec :family "ETBembo" :style "RomanOSF" :height 1.3)
-;;      doom-big-font (font-spec :family "Fira Code" :style "Retina" :size 24))
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 15)
+      doom-variable-pitch-font (font-spec :family "Iosevka Etoile" :size 15))
+      ;;doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 15))
 
 ;; mixed-pitch mode for org files (no clue how to get the variable-pitch-font to match size?!)
 ;;(add-hook! 'org-mode-hook #'mixed-pitch-mode)
 ;;(add-hook! 'org-mode-hook #'solaire-mode)
 ;;(setq mixed-pitch-variable-pitch-cursor nil)
+(use-package mixed-pitch
+  :hook (org-mode . mixed-pitch-mode))
+
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -128,14 +125,21 @@
 
 ;; org appear
 (use-package org-appear
+  :after org
   :ensure t
   :hook (org-mode . org-appear-mode)
-  :custom
-  (org-appear-autolinks t)
-  )
-;;(add-hook! org-mode :append #'org-appear-mode)
-;;(setq org-appear-trigger 'always)
-;;(setq org-appear-autolinks t)
+  :config
+  (setq
+    org-appear-trigger 'always
+    org-hide-emphasis-markers t
+    org-appear-autoemphasis t
+    org-appear-autolinks t
+    org-appear-autosubmarkers t
+    org-appear-autoentities t
+    org-appear-autokeywords t
+    org-appear-inside-latex t
+    org-appear-delay 0))
+
 
 ;; use minted for listings
 (add-to-list 'org-latex-packages-alist '("" "minted"))
