@@ -199,8 +199,22 @@
 (global-auto-revert-mode t)
 
 ;; `hotfuzz` better than emacs internal `flex` completion
-(setq completion-styles '(hotfuzz orderless basic))
+;;(setq completion-styles '(hotfuzz orderless basic))
 ;;(setq completion-styles '(flex orderless basic))
+(use-package fussy
+  :ensure t
+  :config
+  (setq fussy-filter-fn 'fussy-filter-default)
+  (setq fussy-use-cache t)
+  (setq fussy-compare-same-score-fn 'fussy-histlen->strlen<)
+
+  (push 'fussy completion-styles)
+  (setq
+   ;; For example, project-find-file uses 'project-files which uses
+   ;; substring completion by default. Set to nil to make sure it's using
+   ;; flx.
+   completion-category-defaults nil
+   completion-category-overrides nil))
 
 ;; defaults proposed in the manual [https://orgmode.org/manual/Activation.html]
 (global-set-key (kbd "C-c l") #'org-store-link)

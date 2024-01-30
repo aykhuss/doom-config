@@ -72,6 +72,8 @@
 ;; emacsclient in terminal looks ugly -> fix(?)
 ;; (package! solaire-mode :disable t)
 
+;; fussy for fuzzy search [[https://github.com/jojojames/fussy]]
+(package! fussy)
 ;; hotfuzz better fuzzy matching in emacs
 (package! hotfuzz
   :recipe (:host github
