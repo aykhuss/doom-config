@@ -241,3 +241,6 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;; smooth scrolling (emacs > 29)
+;; particularly useful with inline images to avoid "jumps"
+(pixel-scroll-precision-mode)
