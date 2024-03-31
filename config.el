@@ -60,6 +60,10 @@
 (setq org-directory "~/Dropbox/org/")
 
 
+;; more performant and resolves conflict with org-appear
+(setq org-fold-core-style 'text-properties)
+
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -130,15 +134,16 @@
   :hook (org-mode . org-appear-mode)
   :config
   (setq
+    org-link-descriptive t
+    ;;org-hide-emphasis-markers t
     org-appear-trigger 'always
-    org-hide-emphasis-markers t
-    org-appear-autoemphasis t
     org-appear-autolinks t
+    org-appear-autoemphasis t
     org-appear-autosubmarkers t
     org-appear-autoentities t
     org-appear-autokeywords t
     org-appear-inside-latex t
-    org-appear-delay 0))
+    org-appear-delay 0.0))
 
 
 ;; use minted for listings
