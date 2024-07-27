@@ -249,3 +249,6 @@
 ;; smooth scrolling (emacs > 29)
 ;; particularly useful with inline images to avoid "jumps"
 (pixel-scroll-precision-mode)
+
+;; disable company word suggestions in org text mode
+(setq company-global-modes '(not text-mode org-mode))
