@@ -52,9 +52,7 @@
 (package! gnuplot)
 
 (package! org-ref)
-(package! org-appear
-  :recipe (:host github
-           :repo "awth13/org-appear"))
+
 (package! pdf-tools)
 
 ;; neat theme
@@ -89,3 +87,32 @@
 ;;  (setq mixed-pitch-set-heigth t)
 ;;  (set-face-attribute 'variable-pitch nil :height 1.3))
 (package! mixed-pitch)
+
+;; we need to first unpin the package before overriding the build-in
+;(unpin! org-appear)
+;(package! org-appear :disable t)
+; (package! org-appear
+;  ;:pin "ddba200bb4db6947d384dcc1907b559dfcf5ef74"
+;  :pin nil
+;  :recipe (:type git
+;           :host github
+;           :repo "awth13/org-appear"
+;           :branch "org-9.7-fixes"
+;           :inherit nil
+;           :source nil
+;           ;:build nil
+;           ))
+; (package! org-appear :recipe (:branch "org-9.7-fixes"))
+; (package! org-appear
+;   :recipe (:fork (:host github
+;                   :repo "awth13/org-appear"
+;                   :branch "org-9.7-fixes")))
+(package! org-appear
+ :recipe (:type git
+          :host github
+          :repo "awth13/org-appear"
+          :branch "org-9.7-fixes"))
+
+;; manually do the "+pretty" part
+(package! org-superstar)
+(package! org-fancy-priorities)

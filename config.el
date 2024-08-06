@@ -128,7 +128,7 @@
 
 
 ;; org appear
-(use-package org-appear
+(use-package org-appear ; better markup edit
   :after org
   :ensure t
   :hook (org-mode . org-appear-mode)
@@ -144,6 +144,25 @@
     org-appear-autokeywords t
     org-appear-inside-latex t
     org-appear-delay 0.0))
+
+(use-package! org-superstar ; "prettier" bullets
+  :hook (org-mode . org-superstar-mode)
+  :config
+  ;; Make leading stars truly invisible, by rendering them as spaces!
+  (setq org-superstar-leading-bullet ?\s
+        org-superstar-leading-fallback ?\s
+        org-hide-leading-stars nil
+        org-superstar-todo-bullet-alist
+        '(("TODO" . 9744)
+          ("[ ]"  . 9744)
+          ("DONE" . 9745)
+          ("[X]"  . 9745))))
+
+
+(use-package! org-fancy-priorities ; priority icons
+  :hook (org-mode . org-fancy-priorities-mode)
+  :hook (org-agenda-mode . org-fancy-priorities-mode)
+  :config (setq org-fancy-priorities-list '("⚑" "⬆" "■")))
 
 
 ;; use minted for listings
